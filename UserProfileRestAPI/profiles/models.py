@@ -15,9 +15,9 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-    def save(self, *args, **kwargs): ## overwriting save method for image size
-        ## image resize
-        super().save(*args, *kwargs)
+    def save(self, force_insert=False, *args, **kwargs):             ## overwriting save method for image size,
+        ## image resize                                              ## force_insert=false yaptım çünkü user oluştuduğumda sinyal ile prifli de oluştururken 
+        super().save(*args, *kwargs)                                 ## 'Cannot force both insert and updating in model saving' hatası aldım
         if self.photo:
             img = Image.open(self.photo.path)
             if img.height > 600 or img.width > 600:

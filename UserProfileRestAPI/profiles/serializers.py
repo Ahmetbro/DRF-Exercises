@@ -3,5 +3,5 @@ from rest_framework import serializers
 
 
 
-class ProfilesSerializer(serializers.ModelSerializer):
-    pass
+# class ProfilesSerializer(serializers.ModelSerializer):
+#     pass
