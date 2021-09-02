@@ -15,7 +15,7 @@ class ProfilePhotoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields= ('photo')
+        fields= ['photo']
 
 class ProfileStatusSerializer(serializers.ModelSerializer):
     user_profile = serializers.StringRelatedField(read_only=True)
