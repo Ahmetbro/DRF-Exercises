@@ -25,6 +25,7 @@ class Profile(models.Model):
                 img.thumbnail(output_size)
                 img.save(self.photo.path)
 
+
     # class Meta:
     #     verbose_name_plural = 'Profiller' django admin sitesinddeki model adı
 
