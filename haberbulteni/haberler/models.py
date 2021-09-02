@@ -9,6 +9,9 @@ class Gazeteci(models.Model):
 
     def __str__(self):
         return f'{self.isim} {self.soyisim}'
+    
+    class Meta:
+        verbose_name_plural = 'Gazeteciler'
 
 class Makale(models.Model):
     yazar = models.ForeignKey(Gazeteci, on_delete=models.CASCADE, related_name='makaleler')
@@ -23,3 +26,6 @@ class Makale(models.Model):
 
     def __str__(self):
         return self.baslik
+
+    class Meta:
+        verbose_name_plural = 'Makaleler'

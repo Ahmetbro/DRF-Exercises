@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,8 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'profiles.apps.ProfilesConfig',
+    'rest_framework',
+    'rest_framework.authtoken',  ## devamında migrations yapmamız laızm
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_auth.registration', # rest_auth allauth u kullanıyor registration için
+    'django.contrib.sites',
+    'django_extensions',
+
 ]
 
 MIDDLEWARE = [
@@ -78,7 +88,7 @@ WSGI_APPLICATION = 'UserProfileRestAPI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
     }
 }
 
@@ -127,3 +137,17 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'uploads'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+### KAYIT İŞLEMLERİ İÇİN
+
+SITE_ID = 1 # sitemize id vermemiz gerekiyor
+
+ACCOUNT_EMAIL_VERIFICATION = 'none' # Kaytı esnasında email onayı isteniyor mu
+ACCOUNT_EMAIL_REQUIRED = (True,)  # Kayıt esnasında kullanıcı email adresi vermeli mi
