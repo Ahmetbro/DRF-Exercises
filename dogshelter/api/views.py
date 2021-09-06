@@ -6,10 +6,12 @@ from rest_framework.views import APIView
 from api.models import Dog, Breed
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin,RetrieveModelMixin, DestroyModelMixin
 from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 # Create your views here.
 
 
 class DogList(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request):
         dog = Dog.objects.all()
         serializer = DogSerializer(dog, many=True)
@@ -23,6 +25,7 @@ class DogList(APIView):
         return Response('Bad Data', status=status.HTTP_400_BAD_REQUEST)
 
 class DogDetail(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get_object(self, pk=None):
         dog = get_object_or_404(Dog, pk=pk)
         return dog
@@ -47,6 +50,7 @@ class DogDetail(APIView):
 class BreedList(ListModelMixin, CreateModelMixin, GenericAPIView):
     queryset = Breed.objects.all()
     serializer_class = BreedSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -58,6 +62,7 @@ class BreedList(ListModelMixin, CreateModelMixin, GenericAPIView):
 class BreedDetail(RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericAPIView):
     queryset = Breed.objects.all()
     serializer_class = BreedSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
     
     def get(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
