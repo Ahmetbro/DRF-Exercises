@@ -16,7 +16,7 @@ class Profile(models.Model):
         return self.user.username
 
     def save(self, force_insert=False, *args, **kwargs):             ## overwriting save method for image size,
-        ## image resize                                              ## force_insert=false yaptım çünkü user oluştuduğumda sinyal ile prifli de oluştururken 
+        ## image resize                                              ## force_insert=false yaptım çünkü user oluştuduğumda sinyal ile profili de oluştururken
         super().save(*args, *kwargs)                                 ## 'Cannot force both insert and updating in model saving' hatası aldım
         if self.photo:
             img = Image.open(self.photo.path)
