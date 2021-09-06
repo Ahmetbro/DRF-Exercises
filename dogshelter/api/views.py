@@ -6,7 +6,10 @@ from rest_framework.views import APIView
 from api.models import Dog, Breed
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin,RetrieveModelMixin, DestroyModelMixin
 from rest_framework.generics import GenericAPIView
+<<<<<<< HEAD
 from api.pagination import StandardResultsSetPagination
+=======
+>>>>>>> 4b27a02942166fa135ed5ecee612a4c66e390aa4
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 # Create your views here.
 
@@ -51,7 +54,10 @@ class DogDetail(APIView):
 class BreedList(ListModelMixin, CreateModelMixin, GenericAPIView):
     queryset = Breed.objects.all()
     serializer_class = BreedSerializer
+<<<<<<< HEAD
     pagination_class = StandardResultsSetPagination
+=======
+>>>>>>> 4b27a02942166fa135ed5ecee612a4c66e390aa4
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request, *args, **kwargs):
@@ -64,7 +70,10 @@ class BreedList(ListModelMixin, CreateModelMixin, GenericAPIView):
 class BreedDetail(RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, GenericAPIView):
     queryset = Breed.objects.all()
     serializer_class = BreedSerializer
+<<<<<<< HEAD
     pagination_class = StandardResultsSetPagination
+=======
+>>>>>>> 4b27a02942166fa135ed5ecee612a4c66e390aa4
     permission_classes = [IsAuthenticatedOrReadOnly]
     
     def get(self, request, *args, **kwargs):
