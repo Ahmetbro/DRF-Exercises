@@ -28,6 +28,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    ],
+}
 
 # Application definition
 
@@ -39,9 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'post.apps.PostConfig',
     'comment.apps.CommentConfig',
     'favourite.apps.FavouriteConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [

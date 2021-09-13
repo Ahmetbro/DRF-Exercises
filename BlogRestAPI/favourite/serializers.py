@@ -17,3 +17,4 @@ class FavouriteSerializer(serializers.ModelSerializer):
 class FavouriteDetailSerializer(serializers.ModelSerializer):
     model = Favourite
     fields = ['content']
+    
