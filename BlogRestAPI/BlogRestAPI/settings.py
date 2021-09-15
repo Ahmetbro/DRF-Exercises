@@ -34,12 +34,11 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication'
     ],
-    'DEFAULT_THROTTLE_CLASSES': {
-        'rest_framework.throttling.ScopedRateThrottle',
-    },
+    # 'DEFAULT_THROTTLE_CLASSES': {
+    #     'rest_framework.throttling.ScopedRateThrottle',
+    # },
     'DEFAULT_THROTTLE_RATES': {
-        'registerthrotte': '5/hour',
-        'ahmet':'5/hour',
+        'registerthrottle': '150/hour',
     }
 }
 

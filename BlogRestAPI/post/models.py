@@ -1,8 +1,6 @@
-from enum import unique
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
-import rest_framework
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_name')
@@ -14,6 +12,9 @@ class Post(models.Model):
     modified = models.DateTimeField(auto_now=True)
     image = models.ImageField(null=True, blank=True, upload_to='profiles/%Y/%m/')
     #modified_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='modifiedbyuser')
+
+    class Meta:
+        ordering = ["id"]
 
     def get_slug(self):
         slug = slugify(self.title.replace("ı","i"))
