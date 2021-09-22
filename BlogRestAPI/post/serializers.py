@@ -8,7 +8,7 @@ class PostSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField(method_name='new_username')
     class Meta:
         model = Post
-        exclude = ['user', 'modified']  # post ederken user seçmemize gerek yok fakat list ederken username i görmek istiyoruz
+        exclude = ['user']  # post ederken user seçmemize gerek yok fakat list ederken username i görmek istiyoruz
 
     def new_username(self, obj):
         return str(obj.user.username)    
