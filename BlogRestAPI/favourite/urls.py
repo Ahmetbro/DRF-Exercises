@@ -6,5 +6,5 @@ from favourite import views
 app_name = "favourite"
 urlpatterns = [
     path('fav/', views.FavouriteCreateListAPIView.as_view(), name='favs'),
-    path('fav/<slug>', views.FavouriteDetailAPIView.as_view(), name='fav-detail'),
+    path('fav/<pk>', views.FavouriteDetailAPIView.as_view(), name='fav-detail'),
 ]

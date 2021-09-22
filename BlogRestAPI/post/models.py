@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_name')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default=1 ,related_name='user_name')
     title = models.CharField(max_length=250)
     content = models.TextField(null=True, blank=True)
     draft = models.BooleanField(default=True)

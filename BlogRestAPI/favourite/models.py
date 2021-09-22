@@ -7,6 +7,8 @@ class Favourite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='favpost')
     content = models.CharField(max_length=120)
-
+    class Meta:
+        ordering = ["-id"]
+        
     def __str__(self):
         return self.user.username

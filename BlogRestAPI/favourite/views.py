@@ -12,6 +12,7 @@ class FavouriteCreateListAPIView(ListCreateAPIView):
     pagination_class = FavPagination
     permission_classes = [IsOwnerOrReadOnly]
 
+
     def get_queryset(self):
         return Favourite.objects.filter(user=self.request.user)
 
@@ -21,6 +22,6 @@ class FavouriteCreateListAPIView(ListCreateAPIView):
 
 class FavouriteDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Favourite.objects.all()
-    serializers = FavouriteDetailSerializer
+    serializer_class = FavouriteDetailSerializer
     pagination_class =FavPagination
     permission_classes = [IsOwnerOrReadOnly]

@@ -3,8 +3,9 @@ from favourite.models import Favourite
 from rest_framework import serializers
 
 class FavouriteSerializer(serializers.ModelSerializer):
-    model = Favourite
-    fields = '__all__'
+    class Meta:
+        model = Favourite
+        fields = '__all__'
 
 
     def validate(self, attrs):
@@ -15,6 +16,7 @@ class FavouriteSerializer(serializers.ModelSerializer):
     
 
 class FavouriteDetailSerializer(serializers.ModelSerializer):
-    model = Favourite
-    fields = ['content']
+    class Meta:
+        model = Favourite
+        fields = ['content']
     
