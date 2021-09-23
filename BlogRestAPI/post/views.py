@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from post.paginations import PostPagination
 from post.permissions import IsOwnerOrReadOnly
 from django.shortcuts import render
@@ -12,6 +13,7 @@ class PostCreateListAPIView(ListCreateAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['title', 'content']
     pagination_class = PostPagination
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Post.objects.filter(draft=True)
