@@ -20,9 +20,7 @@ import rest_framework
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-<<<<<<< HEAD
-    path('api-auth/', include('rest_framework.urls')),
-=======
+
     path('api-auth/', include('rest_framework.urls')), # browsable api da log in yeri gelmesi için
->>>>>>> 4b27a02942166fa135ed5ecee612a4c66e390aa4
+
 ]

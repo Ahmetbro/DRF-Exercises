@@ -21,7 +21,7 @@ class DogList(APIView):
     def post(self, request):
         serializer = DogSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(ex_owner_id=self.request.user.id)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response('Bad Data', status=status.HTTP_400_BAD_REQUEST)
 

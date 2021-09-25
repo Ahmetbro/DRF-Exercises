@@ -13,6 +13,10 @@ class BreedSerializer(serializers.ModelSerializer):
 
 class DogSerializer(serializers.ModelSerializer):
     # breed = serializers.StringRelatedField(read_only=True)
+    dropped_by = serializers.SerializerMethodField()
     class Meta:
         model = Dog
-        fields = '__all__'
+        exclude = ('ex_owner',)
+
+    def get_dropped_by(self, obj):
+        return str(obj.ex_owner.username)
