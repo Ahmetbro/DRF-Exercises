@@ -20,7 +20,10 @@ import rest_framework
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     path('api-auth/', include('rest_framework.urls')), # browsable api da log in yeri gelmesi için
 
 ]
