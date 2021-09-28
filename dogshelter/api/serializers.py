@@ -12,12 +12,7 @@ class BreedSerializer(serializers.ModelSerializer):
 
 
 class DogSerializer(serializers.ModelSerializer):
-<<<<<<< Updated upstream
-    # breed = serializers.StringRelatedField(read_only=True)
-    dropped_by = serializers.SerializerMethodField()
-=======
     #breed = serializers.StringRelatedField(read_only=True)
->>>>>>> Stashed changes
     class Meta:
         model = Dog
         exclude = ('ex_owner',)
