@@ -23,4 +23,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/users/', include('apps.users.urls')),
     path('api/v1/certificate/', include('apps.certificates.urls')),
+    path('api/v1/lecture/', include('apps.lectures.urls')),
 ]
