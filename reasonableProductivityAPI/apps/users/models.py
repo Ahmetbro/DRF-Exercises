@@ -1,8 +1,8 @@
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, User
 from django.db import models
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser, User
-)
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -56,7 +56,7 @@ class MyUser(AbstractBaseUser):
         return True
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True, related_name='userprofile')
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     image = models.ImageField(upload_to='images')
@@ -64,3 +64,11 @@ class UserProfile(models.Model):
     twitter_profile =models.CharField(max_length=150)
     linkedin_profile = models.CharField(max_length=150)
     website = models.CharField(max_length=150)
+
+@receiver(post_save, sender=MyUser)
+def create_userprofile(sender, instance, created, **kwargs):
+    if not created:
+        return
+    UserProfile.objects.create(user=instance)
+    instance.userprofile.save()
+    
