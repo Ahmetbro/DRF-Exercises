@@ -65,6 +65,9 @@ class UserProfile(models.Model):
     linkedin_profile = models.CharField(max_length=150)
     website = models.CharField(max_length=150)
 
+    def __str__(self):
+        return self.user.email
+
 @receiver(post_save, sender=MyUser)
 def create_userprofile(sender, instance, created, **kwargs):
     if not created:

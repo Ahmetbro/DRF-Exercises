@@ -1,10 +1,8 @@
 from django.urls import path, include
-from rest_framework_nested import routers
+from apps.task import views
 
-from .views import TaskViewSet
 
-router= routers.SimpleRouter()
-router.register(r'', TaskViewSet)
+app_name = "tasks"
 urlpatterns = [
-    path('', include(router.urls)),
+    path('users/<pk>/task', views.TaskView.as_view()),
 ]
