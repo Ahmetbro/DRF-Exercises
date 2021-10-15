@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from apps.task import serializers
 from apps.task.serializers import TaskSerializer
 from apps.task.models import Task
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, mixins
 from rest_framework.response import Response
 
 class TaskView(APIView):
@@ -31,3 +31,8 @@ class TaskDetailAPIView(RetrieveUpdateDestroyAPIView):
         instance = Task.objects.filter(user_id = self.kwargs['pk']).get(id = self.kwargs['id'])
         serializer = TaskSerializer(instance)
         return Response(serializer.data)
+
+
+class AllTaskViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
