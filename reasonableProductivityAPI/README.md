@@ -93,7 +93,7 @@ This is an api for the Reasonable Productivity system built with the Django REST
 
 * POST
 
-**/users/:id/list-items/:item_id**
+**/users/:id/lists/:list_id/list-items/:item_id**
 
 * PATCH
 * DELETE
