@@ -25,7 +25,9 @@ class TaskView(APIView):
 class TaskDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    lookup_field = 'id'
 
     def retrieve(self, request, *args, **kwargs):
-        instance = Task.objects.filter(user_id = self.kwargs['pk'])
+        instance = Task.objects.filter(user_id = self.kwargs['pk']).get(id = self.kwargs['id'])
         serializer = TaskSerializer(instance)
+        return Response(serializer.data)
