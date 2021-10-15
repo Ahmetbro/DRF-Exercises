@@ -1,3 +1,5 @@
+from apps.lists.models import List, ListItem
 from django.contrib import admin
 
-# Register your models here.
+admin.site.register(List)
+admin.site.register(ListItem)

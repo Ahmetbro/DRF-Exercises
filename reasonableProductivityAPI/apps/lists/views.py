@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import serializers, status
 from rest_framework.response import Response
-from apps.lists.models import List
-from apps.lists.serializers import ListSerializer
+from apps.lists.models import List, ListItem
+from apps.lists.serializers import ListItemSerializer, ListSerializer
 
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
@@ -32,4 +32,30 @@ class ListDetailAPIView(RetrieveUpdateDestroyAPIView):
     def retrieve(self, request, *args, **kwargs):
         instance = List.objects.filter(user_id = self.kwargs['pk']).get(id = self.kwargs['id'])
         serializer = ListSerializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class ListItemAPIView(ListCreateAPIView):
+    queryset = ListItem.objects.all()
+    serializer_class = ListItemSerializer
+
+    def get(self, request, *args, **kwargs):
+        item = ListItem.objects.filter(list_id = self.kwargs['id'])
+        serializer = ListItemSerializer(item, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, *args, **kwargs):
+        serializer = ListItemSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save(list_id=self.kwargs['id'])
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ListItemDetailAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = ListItem.objects.all()
+    serializer_class = ListItemSerializer
+    lookup_field = 'slug'
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = ListItem.objects.filter(list_id = self.kwargs['id']).get(slug = self.kwargs['slug'])
+        serializer = ListItemSerializer(instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
